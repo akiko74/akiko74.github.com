@@ -9,8 +9,7 @@
   <meta name="author" content="Akiko Saito">
 
   
-  <meta name="description" content="test blog
-">
+  <meta name="description" content="Deviseを利用してユーザ登録フォームなどを作るとき子要素を一緒に登録させられるようにする方法。 例として、UserモデルにCharacterという子テーブルがあり、UserをDeviseで登録するときにcharactersも一緒に登録したいというケースを考えます。 まずはUserモデルへの追記 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,6 +70,50 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/03/07/making-nested-forms-with-devise/">DeviseでNested Formを作る</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-07T08:28:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Deviseを利用してユーザ登録フォームなどを作るとき子要素を一緒に登録させられるようにする方法。</p>
+
+<p>例として、UserモデルにCharacterという子テーブルがあり、UserをDeviseで登録するときにcharactersも一緒に登録したいというケースを考えます。</p>
+
+<p>まずはUserモデルへの追記。</p>
+
+<p>attr_accessible に子モデルを追加する。characters_attributes という書き方で子要素全てへのアクセスを許可。</p>
+
+<p>% gist c10140e08b1246394bcc %</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/02/25/title/">Title</a></h1>
     
     
@@ -113,6 +156,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/03/07/making-nested-forms-with-devise/">DeviseでNested Formを作る</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/02/25/title/">title</a>

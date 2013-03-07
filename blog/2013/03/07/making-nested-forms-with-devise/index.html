@@ -5,13 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Memos</title>
+  <title>DeviseでNested Formを作る - Memos</title>
   <meta name="author" content="Akiko Saito">
 
   
-  <meta name="description" content=" Blog Archive 2013 DeviseでNested Formを作る
-Mar 07 2013 title
-Feb 25 2013 Recent Posts DeviseでNested Formを作る title ">
+  <meta name="description" content="Deviseを利用してユーザ登録フォームなどを作るとき子要素を一緒に登録させられるようにする方法。 例として、UserモデルにCharacterという子テーブルがあり、UserをDeviseで登録するときにcharactersも一緒に登録したいというケースを考えます。 まずはUserモデルへの追記 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +18,7 @@ Feb 25 2013 Recent Posts DeviseでNested Formを作る title ">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://akiko74.github.com/blog/archives/">
+  <link rel="canonical" href="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -65,41 +63,86 @@ Feb 25 2013 Recent Posts DeviseでNested Formを作る title ">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">DeviseでNested Formを作る</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-07T08:28:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>Deviseを利用してユーザ登録フォームなどを作るとき子要素を一緒に登録させられるようにする方法。</p>
 
-  
-  <h2>2013</h2>
+<p>例として、UserモデルにCharacterという子テーブルがあり、UserをDeviseで登録するときにcharactersも一緒に登録したいというケースを考えます。</p>
 
-<article>
-  
-<h1><a href="/blog/2013/03/07/making-nested-forms-with-devise/">DeviseでNested Formを作る</a></h1>
-<time datetime="2013-03-07T08:28:00+09:00" pubdate><span class='month'>Mar</span> <span class='day'>07</span> <span class='year'>2013</span></time>
+<p>まずはUserモデルへの追記。</p>
 
+<p>attr_accessible に子モデルを追加する。characters_attributes という書き方で子要素全てへのアクセスを許可。</p>
 
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2013/02/25/title/">title</a></h1>
-<time datetime="2013-02-25T19:32:00+09:00" pubdate><span class='month'>Feb</span> <span class='day'>25</span> <span class='year'>2013</span></time>
-
-
-</article>
-
+<p>% gist c10140e08b1246394bcc %</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Akiko Saito</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-07T08:28:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/" data-via="" data-counturl="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/02/25/title/" title="Previous Post: title">&laquo; title</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
