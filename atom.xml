@@ -4,7 +4,7 @@
   <title><![CDATA[Memos]]></title>
   <link href="http://akiko74.github.com/atom.xml" rel="self"/>
   <link href="http://akiko74.github.com/"/>
-  <updated>2013-03-07T12:57:18+09:00</updated>
+  <updated>2013-03-07T13:01:05+09:00</updated>
   <id>http://akiko74.github.com/</id>
   <author>
     <name><![CDATA[Akiko Saito]]></name>
@@ -96,15 +96,6 @@ user.rbの中でdef with_character と定義していたので、userと、user�
 
 <p>これで、子要素まで含めて一括登録が出来るはず。
 DeviseのErrorでもう一度new.html.erbが呼ばれると、子要素の配列が増えるのですが、それを解消する方法は模索中…</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[title]]></title>
-    <link href="http://akiko74.github.com/blog/2013/02/25/title/"/>
-    <updated>2013-02-25T19:32:00+09:00</updated>
-    <id>http://akiko74.github.com/blog/2013/02/25/title</id>
-    <content type="html"><![CDATA[<p>test blog</p>
 ]]></content>
   </entry>
   
