@@ -4,7 +4,7 @@
   <title><![CDATA[Memos]]></title>
   <link href="http://akiko74.github.com/atom.xml" rel="self"/>
   <link href="http://akiko74.github.com/"/>
-  <updated>2013-04-05T12:57:39+09:00</updated>
+  <updated>2013-04-05T12:59:21+09:00</updated>
   <id>http://akiko74.github.com/</id>
   <author>
     <name><![CDATA[Akiko Saito]]></name>
@@ -32,11 +32,15 @@
 
 <h2>4Pによる分析</h2>
 
-<p><strong>商品</strong>
-* ナショナルブランドを取り扱う
-* 品揃えの絞り込み
-* セット販売
-* 下取りとセットで買い替え促進</p>
+<p><strong>商品</strong></p>
+
+<ul>
+<li><p>ナショナルブランドを取り扱う</p></li>
+<li><p>品揃えの絞り込み</p></li>
+<li><p>セット販売</p></li>
+<li><p>下取りとセットで買い替え促進</p></li>
+</ul>
+
 
 <p><strong>価格</strong>
 <em>金利手数料無料でお得感、買える感を出す
