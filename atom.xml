@@ -4,7 +4,7 @@
   <title><![CDATA[Memos]]></title>
   <link href="http://akiko74.github.com/atom.xml" rel="self"/>
   <link href="http://akiko74.github.com/"/>
-  <updated>2013-05-06T16:10:37+09:00</updated>
+  <updated>2013-05-07T07:52:02+09:00</updated>
   <id>http://akiko74.github.com/</id>
   <author>
     <name><![CDATA[Akiko Saito]]></name>
@@ -487,6 +487,9 @@ end</code></pre></noscript></div>
 
 
 <p>attr_accessible に子モデルを追加します。characters_attributes という書き方で子要素全てへのアクセスを許可。</p>
+
+<!-- more -->
+
 
 <p>次に、accepts_nested_attributes_for　に子モデルを追加します。</p>
 
