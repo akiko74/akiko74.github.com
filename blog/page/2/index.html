@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>DeviseでNested Formを作る - Memos</title>
+  <title>Memos</title>
   <meta name="author" content="Akiko Saito">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/">
+  <link rel="canonical" href="http://akiko74.github.com/blog/page/2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -73,12 +73,15 @@
 </nav> -->
   <div id="main">
     <div id="content">
-      <div>
-<article class="hentry" role="article">
+      <div class="blog-index">
   
+  
+  
+    <article>
+      
   <header>
     
-      <h1 class="entry-title">DeviseでNested Formを作る</h1>
+      <h1 class="entry-title"><a href="/blog/2013/03/07/making-nested-forms-with-devise/">DeviseでNested Formを作る</a></h1>
     
     
       <p class="meta">
@@ -101,7 +104,7 @@
   </header>
 
 
-<div class="entry-content"><p>Deviseを利用してユーザ登録フォームなどを作るとき子要素を一緒に登録させられるようにする方法。</p>
+  <div class="entry-content"><p>Deviseを利用してユーザ登録フォームなどを作るとき子要素を一緒に登録させられるようにする方法。</p>
 
 <p>例として、UserモデルにCharacterという子テーブルがあり、UserをDeviseで登録するときにcharactersも一緒に登録したいというケースを考えます。</p>
 
@@ -131,104 +134,25 @@ end</code></pre></noscript></div>
 
 <p>attr_accessible に子モデルを追加します。characters_attributes という書き方で子要素全てへのアクセスを許可。</p>
 
-<!-- more -->
-
-<p>次に、accepts_nested_attributes_for　に子モデルを追加します。</p>
-
-<p>そして、Viewの中に追加する field_for のために、modelに子モデルのinstanceを作成します。</p>
-
-<p>def with_character
-  self.characters.build
-  self
-end</p>
-
-<p>複数個登録する場合は、Array.new(5) {self.characters.build} のような感じで配列で渡しておきます。</p>
-
-<p>次にViewのほう。</p>
-
-<div><script src='https://gist.github.com/5105404.js?file=new.html.erb'></script>
-<noscript><pre><code>&lt;h2&gt;Registration&lt;/h2&gt;
- 
-&lt;%= form_for([resource, resource.with_character], :as =&gt; resource_name, :url =&gt; registration_path(resource_name)) do |f| %&gt;
-  &lt;%= devise_error_messages! %&gt;
- 
-  &lt;div&gt;&lt;%= f.label :email %&gt;&lt;br /&gt;
-  &lt;%= f.email_field :email, :autofocus =&gt; true %&gt;&lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.label :password %&gt;&lt;br /&gt;
-  &lt;%= f.password_field :password %&gt;&lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.label :password_confirmation %&gt;&lt;br /&gt;
-  &lt;%= f.password_field :password_confirmation %&gt;&lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.fields_for :characters do |character_form| %&gt;
-    &lt;%= character_form.label :char_name %&gt;
-    &lt;%= character_form.text_field :char_name %&gt;
-    &lt;% end %&gt;
-  &lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.submit &quot;Sign up&quot; %&gt;&lt;/div&gt;
-&lt;% end %&gt;
- 
-&lt;%= render &quot;devise/shared/links&quot; %&gt;</code></pre></noscript></div>
-
-<p>いつもNested_formsの書き方が分からなくなりますが、まずform_forのところを[配列]で定義します。
-user.rbの中でdef with_character と定義していたので、userと、userの子モデルであるcharactersのインスタンスを配列に入れます。</p>
-
-<p>子要素はf.fields_forで入れられるので、モデル名を渡し(:characters)カラムを作成します。</p>
-
-<p>これで、子要素まで含めて一括登録が出来るはず。
-DeviseのErrorでもう一度new.html.erbが呼ばれると、子要素の配列が増えるのですが、それを解消する方法は模索中…</p>
 </div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Akiko Saito</span></span>
-
-      
-
-
-
-
-
-
-
-
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/03/07/making-nested-forms-with-devise/">Read on &rarr;</a>
+    </footer>
   
 
 
-<time datetime="2013-03-07T08:28:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
-      
-
-
-    </p>
+    </article>
+  
+  <div class="pagination">
     
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/" data-via="akiko74" data-counturl="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/" >Tweet</a>
-  
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
+    <a href="archives">Blog Archives</a>
     
-    <p class="meta">
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/04/05/introduction-mbae/" title="Next Post: MBA Essentials イントロダクション">MBA Essentials イントロダクション &raquo;</a>
-      
-    </p>
-  </footer>
-</article>
-
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
 </div>
-
 <aside class="sidebar">
   
     <section>
@@ -271,7 +195,7 @@ DeviseのErrorでもう一度new.html.erbが呼ばれると、子要素の配列
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating...</li>
+    <li class="loading">Status updating&#8230;</li>
   </ul>
   
   <a href="https://github.com/akiko74">@akiko74</a> on GitHub
@@ -320,7 +244,6 @@ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 
   
 </aside>
-
 
     </div>
   </div>
