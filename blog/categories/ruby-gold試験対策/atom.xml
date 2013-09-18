@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby Gold試験対策 | Memos]]></title>
+  <link href="http://akiko74.github.com/blog/categories/ruby-gold試験対策/atom.xml" rel="self"/>
+  <link href="http://akiko74.github.com/"/>
+  <updated>2013-09-19T07:43:52+09:00</updated>
+  <id>http://akiko74.github.com/</id>
+  <author>
+    <name><![CDATA[Akiko Saito]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Gold 認定試験対策 -概要-]]></title>
+    <link href="http://akiko74.github.com/blog/2013/09/18/ruby-gold/"/>
+    <updated>2013-09-18T07:48:00+09:00</updated>
+    <id>http://akiko74.github.com/blog/2013/09/18/ruby-gold</id>
+    <content type="html"><![CDATA[<p>先日、<a href="http://www.ruby.or.jp/ja/certification/examination/">Ruby Goldの認定試験</a>を受けてきました。
+無事合格しましたが、普段意識しないとすぐに忘れてしまうので内容とポイントを備忘録として残しておきます。</p>
+
+<h1 id="toc_0">出題範囲</h1>
+
+<p>Ruby公式資格教科書を使って勉強しました。
+以下、全て2013年8月時点、Ruby1.8をベースにした試験の時の記録です。今後変更になる可能性にご注意ください。</p>
+
+<p><a href="http://www.amazon.co.jp/gp/product/4774150010/ref=as_li_qf_sp_asin_il?ie=UTF8&camp=247&creative=1211&creativeASIN=4774150010&linkCode=as2&tag=akiko74-22"><img border="0" src="http://ws-fe.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=4774150010&Format=_SL110_&ID=AsinImage&MarketPlace=JP&ServiceVersion=20070822&WS=1&tag=akiko74-22" ></a><img src="http://ir-jp.amazon-adsystem.com/e/ir?t=akiko74-22&l=as2&o=9&a=4774150010" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /></p>
+
+<p>-第1章 Rubyとは</p>
+
+<p>歴史や周辺環境など。試験には出なかった。</p>
+
+<!-- more -->
+
+<p>-第2章 実行環境</p>
+
+<p>組み込み定数やコマンドオプション、特殊変数などを覚える。</p>
+
+<p>-第3章 文法</p>
+
+<p>変数の代入、スコープ、ブロック、大域脱出、例外クラス、スレッドなど。
+代入したときに変数がどのように変化していくかはマスト。
+ブロックについての記述が勉強になった。</p>
+
+<p>-第4章 オブジェクト指向</p>
+
+<p>クラス継承、メソッド探索、インスタンスメソッド、クラスメソッド、Moduleなど。
+入れ子になったクラスのアウトプットを問われる問題が多かった。
+オブジェクト指向の基礎ともなる章で、これまた勉強になった。</p>
+
+<p>-第5章 組み込みクラス</p>
+
+<p>Objectクラスのオブジェクト比較やProc、Enumerable、Marshalなど。
+普段あまり使わないのでまだまだ理解不足。</p>
+
+<p>-第6章 添付ライブラリ</p>
+
+<p>test/unit、rdoc、date、socketとかを覚える。</p>
+
+<p>7章と8章は模擬試験がついています。</p>
+
+<p>クラスやモジュールの階層についての理解を問うもの、スコープの範囲を選択するもの、定数への理解などが出ていたように思います。また、正規表現もSilverより高度な後方参照や繰り返しなどがありました。</p>
+
+<p>全体的な傾向としては、知識についての選択問題と理解度を問うアウトプット算出系問題に分かれているようです。選択問題も、複数選択という表記になっていて正解がいくつか書いていないものもあったので要注意です。</p>
+
+<p>知識についての問題は覚えている限りだと以下のとおり。</p>
+
+<p>-Rubyの引数オプションについての説明を正しく選択するもの。ディレクトリオプションの挙動など。</p>
+
+<p>-データ部分を表す表記の選択。こんな感じのコードがあって、DATAとENDの部分が空白になっているとか。</p>
+
+<script src="https://gist.github.com/akiko74/28322099a8c9e595d106.js"></script>
+
+<p>-正規表現の後方参照の表現方法。$1とかですね。</p>
+
+<p>-test/unitのルール。</p>
+
+<p>などなど。</p>
+
+<p>知識は本を見て覚えるしかないのですが、逆に覚えておくとイメージ的には半分くらいは点が取れると思います。
+あと半分は実行後の結果を問う問題なのでRubyの動きを理解して臨むことになるでしょう。</p>
+]]></content>
+  </entry>
+  
+</feed>
