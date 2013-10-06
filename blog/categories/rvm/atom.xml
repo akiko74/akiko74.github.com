@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: RVM | Memos]]></title>
+  <link href="http://akiko74.github.com/blog/categories/rvm/atom.xml" rel="self"/>
+  <link href="http://akiko74.github.com/"/>
+  <updated>2013-10-06T14:24:19+09:00</updated>
+  <id>http://akiko74.github.com/</id>
+  <author>
+    <name><![CDATA[Akiko Saito]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[RVMでrubyをアップデート]]></title>
+    <link href="http://akiko74.github.com/blog/2013/10/06/rvm-update/"/>
+    <updated>2013-10-06T13:38:00+09:00</updated>
+    <id>http://akiko74.github.com/blog/2013/10/06/rvm-update</id>
+    <content type="html"><![CDATA[<p>RVMを使ってプロジェクト毎にRubyやRailsのバージョン管理をしていますが、アップデートする機会が少ないので手順をメモ。</p>
+
+<h1 id="toc_29">RVMの更新</h1>
+
+<p>まずはRVMを最新にしてRubyのリストを更新します。</p>
+
+<!--more-->
+
+<p>rvm get latest と打つと最新版(バグあるかも）というものが取れるので、そのあたりはお好みで。</p>
+
+<p>これでrvmがアップデートされました。</p>
+
+<h1 id="toc_30">Rubyの更新</h1>
+
+<p>次は、入れたいrubyのバージョンを取れているかを確認します。</p>
+
+<p>おっと、2.1.0のプレビューまで入ってきました。
+今回は2.0.0-p195を2.0.0-p247にアップデートしたい。ということで、次にrubyをアップデートします。</p>
+
+<p>あとは、gemsetを移行するかとか、p195は消すかとか聞かれるので、Y/nで選びます。
+勢いで全部Yにしましたが、どんな影響が出るのかはまだ未確認。てか影響出ないよね。。</p>
+
+<p>gemsetを移行すると処理に時間がかかるので、その間にこういうメモが書けるという利点もあります(違</p>
+
+<h1 id="toc_31">リファレンス</h1>
+
+<p>RVMは分かりにくいし、まだgemsetの紐付けとか理解していないけど、<a href="https://rvm.io/">公式サイト</a>のドキュメントは充実してるので頑張って読む。RVMよりrbenvだって声もあるけど、今のところRVMでそれほど不便はないので理解するまでは移れないかな。</p>
+
+<p>トップページに載ってるいわゆるアメリカンコミック風な絵にはいつも癒されます。</p>
+]]></content>
+  </entry>
+  
+</feed>

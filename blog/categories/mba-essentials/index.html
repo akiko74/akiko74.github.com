@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>DeviseでNested Formを作る - Memos</title>
+  <title>Category: MBA Essentials - Memos</title>
   <meta name="author" content="Akiko Saito">
 
   
-  <meta name="description" content="Deviseを利用してユーザ登録フォームなどを作るとき子要素を一緒に登録させられるようにする方法。 例として、UserモデルにCharacterという子テーブルがあり、UserをDeviseで登録するときにcharactersも一緒に登録したいというケースを考えます。 まずはUserモデルへの追記 &hellip;">
+  <meta name="description" content="Category: MBA Essentials">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/">
+  <link rel="canonical" href="http://akiko74.github.comblog/categories/mba-essentials/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -74,163 +74,147 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">DeviseでNested Formを作る</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-07T08:28:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
-        
-      </p>
+    <h1 class="entry-title">Category: MBA Essentials</h1>
     
   </header>
+  
+  <div id="blog-archives" class="category">
 
 
-<div class="entry-content"><p>Deviseを利用してユーザ登録フォームなどを作るとき子要素を一緒に登録させられるようにする方法。</p>
 
-<p>例として、UserモデルにCharacterという子テーブルがあり、UserをDeviseで登録するときにcharactersも一緒に登録したいというケースを考えます。</p>
+  
+  <h2>2013</h2>
 
-<p>まずはUserモデルへの追記。</p>
+<article>
+  
+<h1><a href="/blog/2013/08/06/management-mbae/">MBA Essentials 企業経営</a></h1>
+<time datetime="2013-08-06T08:06:00+09:00" pubdate><span class='month'>Aug</span> <span class='day'>06</span> <span class='year'>2013</span></time>
 
-<div><script src='https://gist.github.com/5105404.js?file=user.rb'></script>
-<noscript><pre><code>class User &lt; ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
- 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :characters_attributes
-  # attr_accessible :title, :body
- 
-  has_many :characters
- 
-  accepts_nested_attributes_for :characters
- 
-  def with_character
-    Array.new(5) {self.characters.build}
-    self
-  end
-end</code></pre></noscript></div>
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/mba-essentials/'>MBA Essentials</a></span>
+</footer>
 
-<p>attr_accessible に子モデルを追加します。characters_attributes という書き方で子要素全てへのアクセスを許可。</p>
 
-<!-- more -->
+</article>
 
-<p>次に、accepts_nested_attributes_for　に子モデルを追加します。</p>
 
-<p>そして、Viewの中に追加する field_for のために、modelに子モデルのinstanceを作成します。</p>
 
-<p>def with_character
-  self.characters.build
-  self
-end</p>
+<article>
+  
+<h1><a href="/blog/2013/08/04/accounting-mbae/">MBA Essentials 会計・財務</a></h1>
+<time datetime="2013-08-04T18:11:00+09:00" pubdate><span class='month'>Aug</span> <span class='day'>04</span> <span class='year'>2013</span></time>
 
-<p>複数個登録する場合は、Array.new(5) {self.characters.build} のような感じで配列で渡しておきます。</p>
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/mba-essentials/'>MBA Essentials</a></span>
+</footer>
 
-<p>次にViewのほう。</p>
 
-<div><script src='https://gist.github.com/5105404.js?file=new.html.erb'></script>
-<noscript><pre><code>&lt;h2&gt;Registration&lt;/h2&gt;
- 
-&lt;%= form_for([resource, resource.with_character], :as =&gt; resource_name, :url =&gt; registration_path(resource_name)) do |f| %&gt;
-  &lt;%= devise_error_messages! %&gt;
- 
-  &lt;div&gt;&lt;%= f.label :email %&gt;&lt;br /&gt;
-  &lt;%= f.email_field :email, :autofocus =&gt; true %&gt;&lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.label :password %&gt;&lt;br /&gt;
-  &lt;%= f.password_field :password %&gt;&lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.label :password_confirmation %&gt;&lt;br /&gt;
-  &lt;%= f.password_field :password_confirmation %&gt;&lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.fields_for :characters do |character_form| %&gt;
-    &lt;%= character_form.label :char_name %&gt;
-    &lt;%= character_form.text_field :char_name %&gt;
-    &lt;% end %&gt;
-  &lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.submit &quot;Sign up&quot; %&gt;&lt;/div&gt;
-&lt;% end %&gt;
- 
-&lt;%= render &quot;devise/shared/links&quot; %&gt;</code></pre></noscript></div>
+</article>
 
-<p>いつもNested_formsの書き方が分からなくなりますが、まずform_forのところを[配列]で定義します。
-user.rbの中でdef with_character と定義していたので、userと、userの子モデルであるcharactersのインスタンスを配列に入れます。</p>
 
-<p>子要素はf.fields_forで入れられるので、モデル名を渡し(:characters)カラムを作成します。</p>
 
-<p>これで、子要素まで含めて一括登録が出来るはず。
-DeviseのErrorでもう一度new.html.erbが呼ばれると、子要素の配列が増えるのですが、それを解消する方法は模索中…</p>
+<article>
+  
+<h1><a href="/blog/2013/07/31/operation-mbae/">MBA Essentials オペレーション戦略</a></h1>
+<time datetime="2013-07-31T20:31:00+09:00" pubdate><span class='month'>Jul</span> <span class='day'>31</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/mba-essentials/'>MBA Essentials</a></span>
+</footer>
+
+
+</article>
+
+
+
+<article>
+  
+<h1><a href="/blog/2013/06/19/markething-mbae/">MBA Essentials マーケティング戦略</a></h1>
+<time datetime="2013-06-19T20:53:00+09:00" pubdate><span class='month'>Jun</span> <span class='day'>19</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/mba-essentials/'>MBA Essentials</a></span>
+</footer>
+
+
+</article>
+
+
+
+<article>
+  
+<h1><a href="/blog/2013/06/03/organization-mbae/">MBA Essentials 人材・組織</a></h1>
+<time datetime="2013-06-03T08:35:00+09:00" pubdate><span class='month'>Jun</span> <span class='day'>03</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/mba-essentials/'>MBA Essentials</a></span>
+</footer>
+
+
+</article>
+
+
+
+<article>
+  
+<h1><a href="/blog/2013/05/20/business-strategy-mbae/">MBA Essentials 経営戦略</a></h1>
+<time datetime="2013-05-20T08:01:00+09:00" pubdate><span class='month'>May</span> <span class='day'>20</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/mba-essentials/'>MBA Essentials</a></span>
+</footer>
+
+
+</article>
+
+
+
+<article>
+  
+<h1><a href="/blog/2013/05/01/it-strategy-mbae/">MBA Essentials IT戦略</a></h1>
+<time datetime="2013-05-01T13:21:00+09:00" pubdate><span class='month'>May</span> <span class='day'>01</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/mba-essentials/'>MBA Essentials</a></span>
+</footer>
+
+
+</article>
+
+
+
+<article>
+  
+<h1><a href="/blog/2013/04/11/critical-thinking-mbae/">MBA Essentials クリティカルシンキング</a></h1>
+<time datetime="2013-04-11T07:49:00+09:00" pubdate><span class='month'>Apr</span> <span class='day'>11</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/mba-essentials/'>MBA Essentials</a></span>
+</footer>
+
+
+</article>
+
+
+
+<article>
+  
+<h1><a href="/blog/2013/04/05/introduction-mbae/">MBA Essentials イントロダクション</a></h1>
+<time datetime="2013-04-05T08:11:00+09:00" pubdate><span class='month'>Apr</span> <span class='day'>05</span> <span class='year'>2013</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/mba-essentials/'>MBA Essentials</a></span>
+</footer>
+
+
+</article>
+
 </div>
 
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Akiko Saito</span></span>
-
-      
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-07T08:28:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
-      
-
-<span class="categories">
-  
-    <a class='category' href='/blog/categories/ror-メモ/'>RoR メモ</a>
-  
-</span>
-
-
-    </p>
-    
-      <div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/" data-via="akiko74" data-counturl="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/" >Tweet</a>
-  
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
-  
-</div>
-
-    
-    <p class="meta">
-      
-      
-        <a class="basic-alignment right" href="/blog/2013/04/05/introduction-mbae/" title="Next Post: MBA Essentials イントロダクション">MBA Essentials イントロダクション &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
 </div>

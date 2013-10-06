@@ -5,11 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>DeviseでNested Formを作る - Memos</title>
+  <title>RVMでrubyをアップデート - Memos</title>
   <meta name="author" content="Akiko Saito">
 
   
-  <meta name="description" content="Deviseを利用してユーザ登録フォームなどを作るとき子要素を一緒に登録させられるようにする方法。 例として、UserモデルにCharacterという子テーブルがあり、UserをDeviseで登録するときにcharactersも一緒に登録したいというケースを考えます。 まずはUserモデルへの追記 &hellip;">
+  <meta name="description" content="RVMを使ってプロジェクト毎にRubyやRailsのバージョン管理をしていますが、アップデートする機会が少ないので手順をメモ。 RVMの更新 まずはRVMを最新にしてRubyのリストを更新します。 1
+2
+3
+$rvm get head
+$rvm reload
+$rvm get stable &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +23,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/">
+  <link rel="canonical" href="http://akiko74.github.com/blog/2013/10/06/rvm-update/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -78,7 +83,7 @@
   
   <header>
     
-      <h1 class="entry-title">DeviseでNested Formを作る</h1>
+      <h1 class="entry-title">RVMでrubyをアップデート</h1>
     
     
       <p class="meta">
@@ -94,91 +99,80 @@
   
 
 
-<time datetime="2013-03-07T08:28:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
+<time datetime="2013-10-06T13:38:00+09:00" pubdate data-updated="true">Oct 6<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Deviseを利用してユーザ登録フォームなどを作るとき子要素を一緒に登録させられるようにする方法。</p>
+<div class="entry-content"><p>RVMを使ってプロジェクト毎にRubyやRailsのバージョン管理をしていますが、アップデートする機会が少ないので手順をメモ。</p>
 
-<p>例として、UserモデルにCharacterという子テーブルがあり、UserをDeviseで登録するときにcharactersも一緒に登録したいというケースを考えます。</p>
+<h1 id="toc_86">RVMの更新</h1>
 
-<p>まずはUserモデルへの追記。</p>
+<p>まずはRVMを最新にしてRubyのリストを更新します。</p>
 
-<div><script src='https://gist.github.com/5105404.js?file=user.rb'></script>
-<noscript><pre><code>class User &lt; ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
- 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :characters_attributes
-  # attr_accessible :title, :body
- 
-  has_many :characters
- 
-  accepts_nested_attributes_for :characters
- 
-  def with_character
-    Array.new(5) {self.characters.build}
-    self
-  end
-end</code></pre></noscript></div>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$rvm get head
+</span><span class='line'>$rvm reload
+</span><span class='line'>$rvm get stable</span></code></pre></td></tr></table></div></figure>
 
-<p>attr_accessible に子モデルを追加します。characters_attributes という書き方で子要素全てへのアクセスを許可。</p>
+<!--more-->
 
-<!-- more -->
+<p>rvm get latest と打つと最新版(バグあるかも）というものが取れるので、そのあたりはお好みで。</p>
 
-<p>次に、accepts_nested_attributes_for　に子モデルを追加します。</p>
+<p>これでrvmがアップデートされました。</p>
 
-<p>そして、Viewの中に追加する field_for のために、modelに子モデルのinstanceを作成します。</p>
+<h1 id="toc_87">Rubyの更新</h1>
 
-<p>def with_character
-  self.characters.build
-  self
-end</p>
+<p>次は、入れたいrubyのバージョンを取れているかを確認します。</p>
 
-<p>複数個登録する場合は、Array.new(5) {self.characters.build} のような感じで配列で渡しておきます。</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$rvm list known
+</span><span class='line'>
+</span><span class='line'># MRI Rubies
+</span><span class='line'>[ruby-]1.8.6[-p420]
+</span><span class='line'>[ruby-]1.8.7[-p374]
+</span><span class='line'>[ruby-]1.9.1[-p431]
+</span><span class='line'>[ruby-]1.9.2[-p320]
+</span><span class='line'>[ruby-]1.9.3[-p448]
+</span><span class='line'>[ruby-]2.0.0-p195
+</span><span class='line'>[ruby-]2.0.0[-p247]
+</span><span class='line'>[ruby-]2.1.0-preview1
+</span><span class='line'>[ruby-]2.1.0-head
+</span><span class='line'>ruby-head
+</span></code></pre></td></tr></table></div></figure>
 
-<p>次にViewのほう。</p>
+<p>おっと、2.1.0のプレビューまで入ってきました。
+今回は2.0.0-p195を2.0.0-p247にアップデートしたい。ということで、次にrubyをアップデートします。</p>
 
-<div><script src='https://gist.github.com/5105404.js?file=new.html.erb'></script>
-<noscript><pre><code>&lt;h2&gt;Registration&lt;/h2&gt;
- 
-&lt;%= form_for([resource, resource.with_character], :as =&gt; resource_name, :url =&gt; registration_path(resource_name)) do |f| %&gt;
-  &lt;%= devise_error_messages! %&gt;
- 
-  &lt;div&gt;&lt;%= f.label :email %&gt;&lt;br /&gt;
-  &lt;%= f.email_field :email, :autofocus =&gt; true %&gt;&lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.label :password %&gt;&lt;br /&gt;
-  &lt;%= f.password_field :password %&gt;&lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.label :password_confirmation %&gt;&lt;br /&gt;
-  &lt;%= f.password_field :password_confirmation %&gt;&lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.fields_for :characters do |character_form| %&gt;
-    &lt;%= character_form.label :char_name %&gt;
-    &lt;%= character_form.text_field :char_name %&gt;
-    &lt;% end %&gt;
-  &lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.submit &quot;Sign up&quot; %&gt;&lt;/div&gt;
-&lt;% end %&gt;
- 
-&lt;%= render &quot;devise/shared/links&quot; %&gt;</code></pre></noscript></div>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$rvm upgrade 2.0.0-p195 2.0.0-p247</span></code></pre></td></tr></table></div></figure>
 
-<p>いつもNested_formsの書き方が分からなくなりますが、まずform_forのところを[配列]で定義します。
-user.rbの中でdef with_character と定義していたので、userと、userの子モデルであるcharactersのインスタンスを配列に入れます。</p>
+<p>あとは、gemsetを移行するかとか、p195は消すかとか聞かれるので、Y/nで選びます。
+勢いで全部Yにしましたが、どんな影響が出るのかはまだ未確認。てか影響出ないよね。。</p>
 
-<p>子要素はf.fields_forで入れられるので、モデル名を渡し(:characters)カラムを作成します。</p>
+<p>gemsetを移行すると処理に時間がかかるので、その間にこういうメモが書けるという利点もあります(違</p>
 
-<p>これで、子要素まで含めて一括登録が出来るはず。
-DeviseのErrorでもう一度new.html.erbが呼ばれると、子要素の配列が増えるのですが、それを解消する方法は模索中…</p>
+<h1 id="toc_88">リファレンス</h1>
+
+<p>RVMは分かりにくいし、まだgemsetの紐付けとか理解していないけど、<a href="https://rvm.io/">公式サイト</a>のドキュメントは充実してるので頑張って読む。RVMよりrbenvだって声もあるけど、今のところRVMでそれほど不便はないので理解するまでは移れないかな。</p>
+
+<p>トップページに載ってるいわゆるアメリカンコミック風な絵にはいつも癒されます。</p>
 </div>
 
 
@@ -201,12 +195,12 @@ DeviseのErrorでもう一度new.html.erbが呼ばれると、子要素の配列
   
 
 
-<time datetime="2013-03-07T08:28:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
+<time datetime="2013-10-06T13:38:00+09:00" pubdate data-updated="true">Oct 6<span>th</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ror-メモ/'>RoR メモ</a>
+    <a class='category' href='/blog/categories/rvm/'>RVM</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a>
   
 </span>
 
@@ -215,7 +209,7 @@ DeviseのErrorでもう一度new.html.erbが呼ばれると、子要素の配列
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/" data-via="akiko74" data-counturl="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://akiko74.github.com/blog/2013/10/06/rvm-update/" data-via="akiko74" data-counturl="http://akiko74.github.com/blog/2013/10/06/rvm-update/" >Tweet</a>
   
   
   
@@ -226,8 +220,8 @@ DeviseのErrorでもう一度new.html.erbが呼ばれると、子要素の配列
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/09/18/ruby-gold/" title="Previous Post: Ruby Gold 認定試験対策 -概要-">&laquo; Ruby Gold 認定試験対策 -概要-</a>
       
-        <a class="basic-alignment right" href="/blog/2013/04/05/introduction-mbae/" title="Next Post: MBA Essentials イントロダクション">MBA Essentials イントロダクション &raquo;</a>
       
     </p>
   </footer>
