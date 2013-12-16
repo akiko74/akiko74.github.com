@@ -4,7 +4,7 @@
   <title><![CDATA[Category: RVM | Memos]]></title>
   <link href="http://akiko74.github.com/blog/categories/rvm/atom.xml" rel="self"/>
   <link href="http://akiko74.github.com/"/>
-  <updated>2013-11-13T08:49:38+09:00</updated>
+  <updated>2013-12-16T14:25:29+09:00</updated>
   <id>http://akiko74.github.com/</id>
   <author>
     <name><![CDATA[Akiko Saito]]></name>
@@ -20,7 +20,7 @@
     <id>http://akiko74.github.com/blog/2013/10/06/rvm-update</id>
     <content type="html"><![CDATA[<p>RVMを使ってプロジェクト毎にRubyやRailsのバージョン管理をしていますが、アップデートする機会が少ないので手順をメモ。</p>
 
-<h1 id="toc_29">RVMの更新</h1>
+<h1 id="toc_36">RVMの更新</h1>
 
 <p>まずはRVMを最新にしてRubyのリストを更新します。</p>
 
@@ -30,7 +30,7 @@
 
 <p>これでrvmがアップデートされました。</p>
 
-<h1 id="toc_30">Rubyの更新</h1>
+<h1 id="toc_37">Rubyの更新</h1>
 
 <p>次は、入れたいrubyのバージョンを取れているかを確認します。</p>
 
@@ -42,7 +42,7 @@
 
 <p>gemsetを移行すると処理に時間がかかるので、その間にこういうメモが書けるという利点もあります(違</p>
 
-<h1 id="toc_31">リファレンス</h1>
+<h1 id="toc_38">リファレンス</h1>
 
 <p>RVMは分かりにくいし、まだgemsetの紐付けとか理解していないけど、<a href="https://rvm.io/">公式サイト</a>のドキュメントは充実してるので頑張って読む。RVMよりrbenvだって声もあるけど、今のところRVMでそれほど不便はないので理解するまでは移れないかな。</p>
 

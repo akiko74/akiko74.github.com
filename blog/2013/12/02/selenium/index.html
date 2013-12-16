@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>DeviseでNested Formを作る - Memos</title>
+  <title>Seleniumでスクレイピング（準備編） - Memos</title>
   <meta name="author" content="Akiko Saito">
 
   
-  <meta name="description" content="Deviseを利用してユーザ登録フォームなどを作るとき子要素を一緒に登録させられるようにする方法。 例として、UserモデルにCharacterという子テーブルがあり、UserをDeviseで登録するときにcharactersも一緒に登録したいというケースを考えます。 まずはUserモデルへの追記 &hellip;">
+  <meta name="description" content="とあるWebページをスクレイピングしようと思って、Mechanizeを調べていたのですが、乗り越えられないJavascriptの壁。 「SeleniumとXvfbとHeadless」という組み合わせでVPS上にDisplaylessでブラウザを動かすことが出来るということで、環境構築を行います。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/">
+  <link rel="canonical" href="http://akiko74.github.com/blog/2013/12/02/selenium/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -78,7 +78,7 @@
   
   <header>
     
-      <h1 class="entry-title">DeviseでNested Formを作る</h1>
+      <h1 class="entry-title">Seleniumでスクレイピング（準備編）</h1>
     
     
       <p class="meta">
@@ -94,91 +94,110 @@
   
 
 
-<time datetime="2013-03-07T08:28:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
+<time datetime="2013-12-02T08:06:00+09:00" pubdate data-updated="true">Dec 2<span>nd</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>Deviseを利用してユーザ登録フォームなどを作るとき子要素を一緒に登録させられるようにする方法。</p>
+<div class="entry-content"><p>とあるWebページをスクレイピングしようと思って、Mechanizeを調べていたのですが、乗り越えられないJavascriptの壁。</p>
 
-<p>例として、UserモデルにCharacterという子テーブルがあり、UserをDeviseで登録するときにcharactersも一緒に登録したいというケースを考えます。</p>
+<p>「SeleniumとXvfbとHeadless」という組み合わせでVPS上にDisplaylessでブラウザを動かすことが出来るということで、環境構築を行います。</p>
 
-<p>まずはUserモデルへの追記。</p>
+<h2 id="toc_107">はじめに</h2>
 
-<div><script src='https://gist.github.com/5105404.js?file=user.rb'></script>
-<noscript><pre><code>class User &lt; ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
- 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :characters_attributes
-  # attr_accessible :title, :body
- 
-  has_many :characters
- 
-  accepts_nested_attributes_for :characters
- 
-  def with_character
-    Array.new(5) {self.characters.build}
-    self
-  end
-end</code></pre></noscript></div>
-
-<p>attr_accessible に子モデルを追加します。characters_attributes という書き方で子要素全てへのアクセスを許可。</p>
+<p>今回の環境はこんな感じ。今回に限らず、環境は大体こんな感じのところに同居させてます。さくらさん、いろいろ乗せてもサクサク動く気がして、いいですね。</p>
 
 <!-- more -->
 
-<p>次に、accepts_nested_attributes_for　に子モデルを追加します。</p>
+<p>実行環境：CentOS6.2(さくらVPS)
+          Ruby2.0</p>
 
-<p>そして、Viewの中に追加する field_for のために、modelに子モデルのinstanceを作成します。</p>
+<h2 id="toc_108">Xvfbのインストール</h2>
 
-<p>def with_character
-  self.characters.build
-  self
-end</p>
+<p>まずはXvfbというパッケージをインストール。これはXを仮想的に作るというイメージのもの。（という理解）Xを立ち上げなくても、仮想スクリーンとしてブラウザを起動してくれる。</p>
 
-<p>複数個登録する場合は、Array.new(5) {self.characters.build} のような感じで配列で渡しておきます。</p>
+<p><code>
+yum install Xvfb
+</code></p>
 
-<p>次にViewのほう。</p>
+<h2 id="toc_109">Headlessのインストール</h2>
 
-<div><script src='https://gist.github.com/5105404.js?file=new.html.erb'></script>
-<noscript><pre><code>&lt;h2&gt;Registration&lt;/h2&gt;
- 
-&lt;%= form_for([resource, resource.with_character], :as =&gt; resource_name, :url =&gt; registration_path(resource_name)) do |f| %&gt;
-  &lt;%= devise_error_messages! %&gt;
- 
-  &lt;div&gt;&lt;%= f.label :email %&gt;&lt;br /&gt;
-  &lt;%= f.email_field :email, :autofocus =&gt; true %&gt;&lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.label :password %&gt;&lt;br /&gt;
-  &lt;%= f.password_field :password %&gt;&lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.label :password_confirmation %&gt;&lt;br /&gt;
-  &lt;%= f.password_field :password_confirmation %&gt;&lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.fields_for :characters do |character_form| %&gt;
-    &lt;%= character_form.label :char_name %&gt;
-    &lt;%= character_form.text_field :char_name %&gt;
-    &lt;% end %&gt;
-  &lt;/div&gt;
- 
-  &lt;div&gt;&lt;%= f.submit &quot;Sign up&quot; %&gt;&lt;/div&gt;
-&lt;% end %&gt;
- 
-&lt;%= render &quot;devise/shared/links&quot; %&gt;</code></pre></noscript></div>
+<p>HeadlessはXvfbをRubyからコントロールできるGem。便利Gemは誰かが何かしら公開してくれているので有り難い限りです。</p>
 
-<p>いつもNested_formsの書き方が分からなくなりますが、まずform_forのところを[配列]で定義します。
-user.rbの中でdef with_character と定義していたので、userと、userの子モデルであるcharactersのインスタンスを配列に入れます。</p>
+<p>というわけで、利用するプロジェクトのGemfileに追加。bundlerを使っているのでbundle installで追加します。</p>
 
-<p>子要素はf.fields_forで入れられるので、モデル名を渡し(:characters)カラムを作成します。</p>
+<p><a href="https://github.com/leonid-shevtsov/headless.git">Github</a></p>
 
-<p>これで、子要素まで含めて一括登録が出来るはず。
-DeviseのErrorでもう一度new.html.erbが呼ばれると、子要素の配列が増えるのですが、それを解消する方法は模索中…</p>
+<h2 id="toc_110">Seleniumのインストール</h2>
+
+<p>SeleniumもRubyから操作が出来るdriverが公開されています。同じくGemfileに追加します。</p>
+
+<p><code>
+&#39;selenium-webdriver&#39;
+</code>
+たぶん、普通に入ると思います。</p>
+
+<p><a href="https://github.com/vertis/selenium-webdriver.git">Github</a></p>
+
+<h2 id="toc_111">Firefoxのインストール</h2>
+
+<p>yumで入れようとするとFirefox17しか入りません。さすがに古いので、手動で入れます。それにしても、FFのダウンロードページは少し探しにくいんじゃまいか…</p>
+
+<p>で、ここまで準備が出来たのでirbから<a href="https://github.com/leonid-shevtsov/headless">headless</a>の通りにやってみたものの、起動しないでエラーが出てしまいました。
+Selenium::WebDriverが見つからない的な表示。</p>
+
+<p>結局、Xを入れたときに入るドライバなどが必要ぽいので、残念ながらXは最初から全部入れないと駄目みたいです。軽く出来るのかと思ったら、そうではない。XvfbはあくまでXありきで動くようです。というわけで、イチからXをインストール。</p>
+
+<p><code>
+sudo yum -y groupinstall &quot;X Window System&quot; &quot;Desktop&quot; &quot;Fonts&quot; &quot;General Purpose Desktop&quot;
+</code></p>
+
+<p>まるっとインストール出来たら、irbでテストをしてみます。</p>
+
+<p>Xが足りないというのを知らなかったときに見つけた対応策も備忘録として。Machine-idが無いと怒られたときの対処法のようです。</p>
+
+<p><code>
+dbus-uuidgen &gt; /var/lib/dbus/machine-id’
+</code></p>
+
+<h2 id="toc_112">IRBでテスト</h2>
+
+<p>irb立ち上げて、USAGEにあるとおりに起動させてみます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'rubygems'
+</span><span class='line'>require 'headless'
+</span><span class='line'>require 'selenium-webdriver'
+</span><span class='line'>
+</span><span class='line'>headless = Headless.new
+</span><span class='line'>headless.start
+</span><span class='line'>
+</span><span class='line'>driver = Selenium::WebDriver.for :firefox
+</span><span class='line'>driver.navigate.to 'http://google.com'
+</span><span class='line'>puts driver.title
+</span><span class='line'>
+</span><span class='line'>headless.destroy</span></code></pre></td></tr></table></div></figure>
+
+<p>最後にdestroyしないでirbが終了したりすると、セッションが残ってしまって次にエラーになることがあります。実はこれにハマりましたが、ps aux でprocessを終了させたら元に戻りました。</p>
+
+<h2 id="toc_113">参考にしたURL</h2>
+
+<p><a href="https://gist.github.com/textarcana/5855427">https://gist.github.com/textarcana/5855427</a><br>
+<a href="https://github.com/leonid-shevtsov/headless">https://github.com/leonid-shevtsov/headless</a><br>
+<a href="http://blog.kjirou.net/p/1604">http://blog.kjirou.net/p/1604</a>  </p>
 </div>
 
 
@@ -201,12 +220,12 @@ DeviseのErrorでもう一度new.html.erbが呼ばれると、子要素の配列
   
 
 
-<time datetime="2013-03-07T08:28:00+09:00" pubdate data-updated="true">Mar 7<span>th</span>, 2013</time>
+<time datetime="2013-12-02T08:06:00+09:00" pubdate data-updated="true">Dec 2<span>nd</span>, 2013</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/blog/categories/ror-メモ/'>RoR メモ</a>
+    <a class='category' href='/blog/categories/ruby/'>Ruby</a>
   
 </span>
 
@@ -215,7 +234,7 @@ DeviseのErrorでもう一度new.html.erbが呼ばれると、子要素の配列
     
       <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/" data-via="akiko74" data-counturl="http://akiko74.github.com/blog/2013/03/07/making-nested-forms-with-devise/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://akiko74.github.com/blog/2013/12/02/selenium/" data-via="akiko74" data-counturl="http://akiko74.github.com/blog/2013/12/02/selenium/" >Tweet</a>
   
   
   
@@ -226,8 +245,8 @@ DeviseのErrorでもう一度new.html.erbが呼ばれると、子要素の配列
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/11/05/mashupaward9/" title="Previous Post: Mashup Award 9 にエントリーしてみて分かったこと">&laquo; Mashup Award 9 にエントリーしてみて分かったこと</a>
       
-        <a class="basic-alignment right" href="/blog/2013/04/05/introduction-mbae/" title="Next Post: MBA Essentials イントロダクション">MBA Essentials イントロダクション &raquo;</a>
       
     </p>
   </footer>
