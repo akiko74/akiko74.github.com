@@ -105,7 +105,7 @@
 
 <p>「SeleniumとXvfbとHeadless」という組み合わせでVPS上にDisplaylessでブラウザを動かすことが出来るということで、環境構築を行います。</p>
 
-<h2 id="toc_107">はじめに</h2>
+<h2 id="toc_110">はじめに</h2>
 
 <p>今回の環境はこんな感じ。今回に限らず、環境は大体こんな感じのところに同居させてます。さくらさん、いろいろ乗せてもサクサク動く気がして、いいですね。</p>
 
@@ -114,7 +114,7 @@
 <p>実行環境：CentOS6.2(さくらVPS)
           Ruby2.0</p>
 
-<h2 id="toc_108">Xvfbのインストール</h2>
+<h2 id="toc_111">Xvfbのインストール</h2>
 
 <p>まずはXvfbというパッケージをインストール。これはXを仮想的に作るというイメージのもの。（という理解）Xを立ち上げなくても、仮想スクリーンとしてブラウザを起動してくれる。</p>
 
@@ -122,7 +122,7 @@
 yum install Xvfb
 </code></p>
 
-<h2 id="toc_109">Headlessのインストール</h2>
+<h2 id="toc_112">Headlessのインストール</h2>
 
 <p>HeadlessはXvfbをRubyからコントロールできるGem。便利Gemは誰かが何かしら公開してくれているので有り難い限りです。</p>
 
@@ -130,7 +130,7 @@ yum install Xvfb
 
 <p><a href="https://github.com/leonid-shevtsov/headless.git">Github</a></p>
 
-<h2 id="toc_110">Seleniumのインストール</h2>
+<h2 id="toc_113">Seleniumのインストール</h2>
 
 <p>SeleniumもRubyから操作が出来るdriverが公開されています。同じくGemfileに追加します。</p>
 
@@ -141,7 +141,7 @@ yum install Xvfb
 
 <p><a href="https://github.com/vertis/selenium-webdriver.git">Github</a></p>
 
-<h2 id="toc_111">Firefoxのインストール</h2>
+<h2 id="toc_114">Firefoxのインストール</h2>
 
 <p>yumで入れようとするとFirefox17しか入りません。さすがに古いので、手動で入れます。それにしても、FFのダウンロードページは少し探しにくいんじゃまいか…</p>
 
@@ -162,7 +162,7 @@ sudo yum -y groupinstall &quot;X Window System&quot; &quot;Desktop&quot; &quot;F
 dbus-uuidgen &gt; /var/lib/dbus/machine-id’
 </code></p>
 
-<h2 id="toc_112">IRBでテスト</h2>
+<h2 id="toc_115">IRBでテスト</h2>
 
 <p>irb立ち上げて、USAGEにあるとおりに起動させてみます。</p>
 
@@ -193,7 +193,7 @@ dbus-uuidgen &gt; /var/lib/dbus/machine-id’
 
 <p>最後にdestroyしないでirbが終了したりすると、セッションが残ってしまって次にエラーになることがあります。実はこれにハマりましたが、ps aux でprocessを終了させたら元に戻りました。</p>
 
-<h2 id="toc_113">参考にしたURL</h2>
+<h2 id="toc_116">参考にしたURL</h2>
 
 <p><a href="https://gist.github.com/textarcana/5855427">https://gist.github.com/textarcana/5855427</a><br>
 <a href="https://github.com/leonid-shevtsov/headless">https://github.com/leonid-shevtsov/headless</a><br>
@@ -248,6 +248,8 @@ dbus-uuidgen &gt; /var/lib/dbus/machine-id’
         <a class="basic-alignment left" href="/blog/2013/11/05/mashupaward9/" title="Previous Post: Mashup Award 9 にエントリーしてみて分かったこと">&laquo; Mashup Award 9 にエントリーしてみて分かったこと</a>
       
       
+        <a class="basic-alignment right" href="/blog/2013/12/22/nokogiri/" title="Next Post: Nokogiriでノードを指定">Nokogiriでノードを指定 &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -271,6 +273,10 @@ dbus-uuidgen &gt; /var/lib/dbus/machine-id’
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/12/22/nokogiri/">Nokogiriでノードを指定</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/12/02/selenium/">Seleniumでスクレイピング（準備編）</a>
       </li>
     
@@ -286,15 +292,11 @@ dbus-uuidgen &gt; /var/lib/dbus/machine-id’
         <a href="/blog/2013/09/18/ruby-gold/">Ruby Gold 認定試験対策 -概要-</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/08/06/management-mbae/">MBA Essentials 企業経営</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/mba-essentials/'>MBA Essentials (9)</a></li><li><a href='/blog/categories/ror-memo/'>RoR メモ (1)</a></li><li><a href='/blog/categories/ruby/'>Ruby (2)</a></li><li><a href='/blog/categories/ruby-goldshi-yan-dui-ce/'>Ruby Gold試験対策 (1)</a></li><li><a href='/blog/categories/rvm/'>RVM (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/mba-essentials/'>MBA Essentials (9)</a></li><li><a href='/blog/categories/ror-memo/'>RoR メモ (1)</a></li><li><a href='/blog/categories/ruby/'>Ruby (3)</a></li><li><a href='/blog/categories/ruby-goldshi-yan-dui-ce/'>Ruby Gold試験対策 (1)</a></li><li><a href='/blog/categories/rvm/'>RVM (1)</a></li></ul>
 </section>
 
 

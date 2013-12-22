@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby | Memos]]></title>
   <link href="http://akiko74.github.com/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://akiko74.github.com/"/>
-  <updated>2013-12-16T14:25:29+09:00</updated>
+  <updated>2013-12-22T19:14:49+09:00</updated>
   <id>http://akiko74.github.com/</id>
   <author>
     <name><![CDATA[Akiko Saito]]></name>
@@ -12,6 +12,38 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Nokogiriでノードを指定]]></title>
+    <link href="http://akiko74.github.com/blog/2013/12/22/nokogiri/"/>
+    <updated>2013-12-22T18:21:00+09:00</updated>
+    <id>http://akiko74.github.com/blog/2013/12/22/nokogiri</id>
+    <content type="html"><![CDATA[<p>Seleniumでスクレイピングをするときに、併せて使われる<a href="http://nokogiri.org/">Nokogiri</a>ですが、パスの指定がよくわからなくなるので、一通りメモをしておきます。</p>
+
+<h2 id="toc_25">Xpathで指定する</h2>
+
+<p>XPathはFirefoxのfirebugで探したい場所を右クリックすると「XPathをコピー」というのが出て来て便利。
+これは絶対pathなので、長くなると可読性に欠ける。相対pathに出来るとよいのですが、とりあえずはこれで良しとします。</p>
+
+<!--more-->
+
+<h2 id="toc_26">CSSで指定する</h2>
+
+<p>&lt;div id=&quot;hoge&quot;&gt;を探す。</p>
+
+<p>&lt;div class=&quot;hoge&quot;&gt;を探す。</p>
+
+<p>&lt;table class=&quot;hoge hoge&quot;&gt;を探す。</p>
+
+<p>もしclassがhogeだけだったら、doc.css(&#39;table.hoge&#39;)でもいいらしい。</p>
+
+<h2 id="toc_27">参考にしたサイト</h2>
+
+<p><a href="http://ruby.bastardsbook.com/chapters/html-parsing/">http://ruby.bastardsbook.com/chapters/html-parsing/</a></p>
+
+<p><a href="https://blog.engineyard.com/2010/getting-started-with-nokogiri">https://blog.engineyard.com/2010/getting-started-with-nokogiri</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Seleniumでスクレイピング（準備編）]]></title>
@@ -22,7 +54,7 @@
 
 <p>「SeleniumとXvfbとHeadless」という組み合わせでVPS上にDisplaylessでブラウザを動かすことが出来るということで、環境構築を行います。</p>
 
-<h2 id="toc_26">はじめに</h2>
+<h2 id="toc_28">はじめに</h2>
 
 <p>今回の環境はこんな感じ。今回に限らず、環境は大体こんな感じのところに同居させてます。さくらさん、いろいろ乗せてもサクサク動く気がして、いいですね。</p>
 
@@ -31,7 +63,7 @@
 <p>実行環境：CentOS6.2(さくらVPS)
           Ruby2.0</p>
 
-<h2 id="toc_27">Xvfbのインストール</h2>
+<h2 id="toc_29">Xvfbのインストール</h2>
 
 <p>まずはXvfbというパッケージをインストール。これはXを仮想的に作るというイメージのもの。（という理解）Xを立ち上げなくても、仮想スクリーンとしてブラウザを起動してくれる。</p>
 
@@ -39,7 +71,7 @@
 yum install Xvfb
 </code></p>
 
-<h2 id="toc_28">Headlessのインストール</h2>
+<h2 id="toc_30">Headlessのインストール</h2>
 
 <p>HeadlessはXvfbをRubyからコントロールできるGem。便利Gemは誰かが何かしら公開してくれているので有り難い限りです。</p>
 
@@ -47,7 +79,7 @@ yum install Xvfb
 
 <p><a href="https://github.com/leonid-shevtsov/headless.git">Github</a></p>
 
-<h2 id="toc_29">Seleniumのインストール</h2>
+<h2 id="toc_31">Seleniumのインストール</h2>
 
 <p>SeleniumもRubyから操作が出来るdriverが公開されています。同じくGemfileに追加します。</p>
 
@@ -58,7 +90,7 @@ yum install Xvfb
 
 <p><a href="https://github.com/vertis/selenium-webdriver.git">Github</a></p>
 
-<h2 id="toc_30">Firefoxのインストール</h2>
+<h2 id="toc_32">Firefoxのインストール</h2>
 
 <p>yumで入れようとするとFirefox17しか入りません。さすがに古いので、手動で入れます。それにしても、FFのダウンロードページは少し探しにくいんじゃまいか…</p>
 
@@ -79,13 +111,13 @@ sudo yum -y groupinstall &quot;X Window System&quot; &quot;Desktop&quot; &quot;F
 dbus-uuidgen &gt; /var/lib/dbus/machine-id’
 </code></p>
 
-<h2 id="toc_31">IRBでテスト</h2>
+<h2 id="toc_33">IRBでテスト</h2>
 
 <p>irb立ち上げて、USAGEにあるとおりに起動させてみます。</p>
 
 <p>最後にdestroyしないでirbが終了したりすると、セッションが残ってしまって次にエラーになることがあります。実はこれにハマりましたが、ps aux でprocessを終了させたら元に戻りました。</p>
 
-<h2 id="toc_32">参考にしたURL</h2>
+<h2 id="toc_34">参考にしたURL</h2>
 
 <p><a href="https://gist.github.com/textarcana/5855427">https://gist.github.com/textarcana/5855427</a><br>
 <a href="https://github.com/leonid-shevtsov/headless">https://github.com/leonid-shevtsov/headless</a><br>
@@ -100,7 +132,7 @@ dbus-uuidgen &gt; /var/lib/dbus/machine-id’
     <id>http://akiko74.github.com/blog/2013/10/06/rvm-update</id>
     <content type="html"><![CDATA[<p>RVMを使ってプロジェクト毎にRubyやRailsのバージョン管理をしていますが、アップデートする機会が少ないので手順をメモ。</p>
 
-<h1 id="toc_33">RVMの更新</h1>
+<h1 id="toc_35">RVMの更新</h1>
 
 <p>まずはRVMを最新にしてRubyのリストを更新します。</p>
 
@@ -110,7 +142,7 @@ dbus-uuidgen &gt; /var/lib/dbus/machine-id’
 
 <p>これでrvmがアップデートされました。</p>
 
-<h1 id="toc_34">Rubyの更新</h1>
+<h1 id="toc_36">Rubyの更新</h1>
 
 <p>次は、入れたいrubyのバージョンを取れているかを確認します。</p>
 
@@ -122,7 +154,7 @@ dbus-uuidgen &gt; /var/lib/dbus/machine-id’
 
 <p>gemsetを移行すると処理に時間がかかるので、その間にこういうメモが書けるという利点もあります(違</p>
 
-<h1 id="toc_35">リファレンス</h1>
+<h1 id="toc_37">リファレンス</h1>
 
 <p>RVMは分かりにくいし、まだgemsetの紐付けとか理解していないけど、<a href="https://rvm.io/">公式サイト</a>のドキュメントは充実してるので頑張って読む。RVMよりrbenvだって声もあるけど、今のところRVMでそれほど不便はないので理解するまでは移れないかな。</p>
 

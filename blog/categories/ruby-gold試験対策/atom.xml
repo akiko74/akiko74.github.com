@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Ruby Gold試験対策 | Memos]]></title>
   <link href="http://akiko74.github.com/blog/categories/ruby-gold試験対策/atom.xml" rel="self"/>
   <link href="http://akiko74.github.com/"/>
-  <updated>2013-12-16T14:25:29+09:00</updated>
+  <updated>2013-12-22T19:14:49+09:00</updated>
   <id>http://akiko74.github.com/</id>
   <author>
     <name><![CDATA[Akiko Saito]]></name>
@@ -21,7 +21,7 @@
     <content type="html"><![CDATA[<p>先日、<a href="http://www.ruby.or.jp/ja/certification/examination/">Ruby Goldの認定試験</a>を受けてきました。
 無事合格しましたが、普段意識しないとすぐに忘れてしまうので内容とポイントを備忘録として残しておきます。</p>
 
-<h1 id="toc_25">出題範囲</h1>
+<h1 id="toc_38">出題範囲</h1>
 
 <p>Ruby公式資格教科書を使って勉強しました。
 以下、全て2013年8月時点、Ruby1.8をベースにした試験の時の記録です。今後変更になる可能性にご注意ください。</p>

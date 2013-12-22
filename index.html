@@ -9,7 +9,8 @@
   <meta name="author" content="Akiko Saito">
 
   
-  <meta name="description" content="とあるWebページをスクレイピングしようと思って、Mechanizeを調べていたのですが、乗り越えられないJavascriptの壁。 「SeleniumとXvfbとHeadless」という組み合わせでVPS上にDisplaylessでブラウザを動かすことが出来るということで、環境構築を行います。 &hellip;">
+  <meta name="description" content="Seleniumでスクレイピングをするときに、併せて使われるNokogiriですが、パスの指定がよくわからなくなるので、一通りメモをしておきます。 Xpathで指定する 1
+doc.xpath('xpath') XPathはFirefoxのfirebugで探したい場所を右クリックすると「 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +82,55 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/12/22/nokogiri/">Nokogiriでノードを指定</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-22T18:21:00+09:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Seleniumでスクレイピングをするときに、併せて使われる<a href="http://nokogiri.org/">Nokogiri</a>ですが、パスの指定がよくわからなくなるので、一通りメモをしておきます。</p>
+
+<h2 id="toc_117">Xpathで指定する</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>doc.xpath('xpath')</span></code></pre></td></tr></table></div></figure>
+
+<p>XPathはFirefoxのfirebugで探したい場所を右クリックすると「XPathをコピー」というのが出て来て便利。
+これは絶対pathなので、長くなると可読性に欠ける。相対pathに出来るとよいのですが、とりあえずはこれで良しとします。</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/12/22/nokogiri/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/12/02/selenium/">Seleniumでスクレイピング（準備編）</a></h1>
     
     
@@ -108,7 +158,7 @@
 
 <p>「SeleniumとXvfbとHeadless」という組み合わせでVPS上にDisplaylessでブラウザを動かすことが出来るということで、環境構築を行います。</p>
 
-<h2 id="toc_107">はじめに</h2>
+<h2 id="toc_110">はじめに</h2>
 
 <p>今回の環境はこんな感じ。今回に限らず、環境は大体こんな感じのところに同居させてます。さくらさん、いろいろ乗せてもサクサク動く気がして、いいですね。</p>
 
@@ -165,9 +215,9 @@
 
 <p>タダで転ぶのも何なので、反省点と良かった点をまとめて来年に活かしたいと思います。</p>
 
-<h1 id="toc_96">反省点</h1>
+<h1 id="toc_99">反省点</h1>
 
-<h2 id="toc_97">試しにくかった</h2>
+<h2 id="toc_100">試しにくかった</h2>
 
 </div>
   
@@ -210,7 +260,7 @@
 
   <div class="entry-content"><p>RVMを使ってプロジェクト毎にRubyやRailsのバージョン管理をしていますが、アップデートする機会が少ないので手順をメモ。</p>
 
-<h1 id="toc_93">RVMの更新</h1>
+<h1 id="toc_96">RVMの更新</h1>
 
 <p>まずはRVMを最新にしてRubyのリストを更新します。</p>
 
@@ -263,7 +313,7 @@
   <div class="entry-content"><p>先日、<a href="http://www.ruby.or.jp/ja/certification/examination/">Ruby Goldの認定試験</a>を受けてきました。
 無事合格しましたが、普段意識しないとすぐに忘れてしまうので内容とポイントを備忘録として残しておきます。</p>
 
-<h1 id="toc_92">出題範囲</h1>
+<h1 id="toc_95">出題範囲</h1>
 
 <p>Ruby公式資格教科書を使って勉強しました。
 以下、全て2013年8月時点、Ruby1.8をベースにした試験の時の記録です。今後変更になる可能性にご注意ください。</p>
@@ -319,9 +369,9 @@
 
 <p>トップの経営能力が出た事例として、日産自動車が取り上げられました。</p>
 
-<h1 id="toc_85">日産自動車の経営力</h1>
+<h1 id="toc_88">日産自動車の経営力</h1>
 
-<h2 id="toc_86">日産の業績悪化とその対応</h2>
+<h2 id="toc_89">日産の業績悪化とその対応</h2>
 
 <p>1970年代はトヨタと日産で販売台数に差がなく、まさに二強という感じだったのですが2000年には日産はトヨタの販売台数の半分以下となってしまいます。</p>
 
@@ -425,7 +475,7 @@
 
 <p>ちなみに、英語でオペレーションを説明するときは「Do」ではなく「Penetrate」＝「やりきる」でないと駄目とのこと。始めるのはどの企業でも可能なのですが、やりぬく、やりきる、やり通す、というのが難しいのです。</p>
 
-<h1 id="toc_73">事例研究−赤城乳業−</h1>
+<h1 id="toc_76">事例研究−赤城乳業−</h1>
 
 <p>オペレーションの事例として、赤城乳業が取り上げられました。<br>
 </div>
@@ -474,7 +524,7 @@
 
 <p>今日のテーマは最近顕著に起きている「コモディティ化」と脱却のための「ポジショニング」です。  </p>
 
-<h1 id="toc_67">日本企業の利益率</h1>
+<h1 id="toc_70">日本企業の利益率</h1>
 
 <p>最初に日本企業の利益率の推移から始まりました。</p>
 
@@ -547,59 +597,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/20/business-strategy-mbae/">MBA Essentials 経営戦略</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-20T08:01:00+09:00" pubdate data-updated="true">May 20<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>早稲田大学×日経のMBA Essentials 4回目は経営戦略です。  </p>
-
-<p>「戦略」はバーゲンセールにでもなったかのように組織の上から下まで日々連呼されています。<br>
-曰く「この商品は戦略的に売る」⇒トップダウンで作った商品だったり<br>
-曰く「戦略的な価格設定をした」⇒単なる値下げだったり<br>
-曰く「今年は販路拡大に向けて戦略的に活動します」⇒もはや活動内容がわからない  </p>
-
-<p>上部から「今年は戦略的に組織を変える」みたいなことを言われ、「で、何するんですか？」て聞いたら「それはこれから考えるんだよ」とすごく嫌な顔をされたことがあります(笑)<br>
-「戦略を考えた結果、組織を変えるという手段が出るんじゃないの？」という空しい突っ込みはやめました。<br>
-戦略的かどうかは外部が判断することであり、実行する人が自ら「戦略的」と謳うときは大抵中身がなくて寒いですね。</p>
-
-<p>さて。そういう「戦略」大安売りの昨今なので、<a href="http://bizacademy.nikkei.co.jp/special/mba2013/">講義紹介</a> にも「『戦略』という言葉は、企業内で多用され過ぎています。「戦略」は、書類を重厚に見せる枕詞ではありません。」と挑発的な言葉が載っています。<br>
-では「戦略」とは、実際どのようなものでしょうか。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/05/20/business-strategy-mbae/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -625,6 +622,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/12/22/nokogiri/">Nokogiriでノードを指定</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/12/02/selenium/">Seleniumでスクレイピング（準備編）</a>
       </li>
     
@@ -640,15 +641,11 @@
         <a href="/blog/2013/09/18/ruby-gold/">Ruby Gold 認定試験対策 -概要-</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/08/06/management-mbae/">MBA Essentials 企業経営</a>
-      </li>
-    
   </ul>
 </section>
 <section>
   <h1>Categories</h1>
-    <ul id="category-list"><li><a href='/blog/categories/mba-essentials/'>MBA Essentials (9)</a></li><li><a href='/blog/categories/ror-memo/'>RoR メモ (1)</a></li><li><a href='/blog/categories/ruby/'>Ruby (2)</a></li><li><a href='/blog/categories/ruby-goldshi-yan-dui-ce/'>Ruby Gold試験対策 (1)</a></li><li><a href='/blog/categories/rvm/'>RVM (1)</a></li></ul>
+    <ul id="category-list"><li><a href='/blog/categories/mba-essentials/'>MBA Essentials (9)</a></li><li><a href='/blog/categories/ror-memo/'>RoR メモ (1)</a></li><li><a href='/blog/categories/ruby/'>Ruby (3)</a></li><li><a href='/blog/categories/ruby-goldshi-yan-dui-ce/'>Ruby Gold試験対策 (1)</a></li><li><a href='/blog/categories/rvm/'>RVM (1)</a></li></ul>
 </section>
 
 
