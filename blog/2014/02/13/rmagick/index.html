@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: RVM - Memos</title>
+  <title>RMagickで静止画から動画を作る - Memos</title>
   <meta name="author" content="Akiko Saito">
 
   
-  <meta name="description" content="Category: RVM">
+  <meta name="description" content="たくさんの静止画、いわゆるパラパラ漫画状態からmp4形式の動画を作るまでのプロセスメモ。 環境 開発環境 CentOS6が乗っているVPSにruby2.1.0+Rails4.0を入れて使ってます。 事前準備 画像を扱うため、RMagickをgemでインストールします。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://akiko74.github.comblog/categories/rvm/">
+  <link rel="canonical" href="http://akiko74.github.com/blog/2014/02/13/rmagick/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -74,35 +74,139 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: RVM</h1>
+    
+      <h1 class="entry-title">RMagickで静止画から動画を作る</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-13T15:37:00+09:00" pubdate data-updated="true">Feb 13<span>th</span>, 2014</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>たくさんの静止画、いわゆるパラパラ漫画状態からmp4形式の動画を作るまでのプロセスメモ。</p>
 
-  
-  <h2>2013</h2>
+<h1 id="toc_126">環境</h1>
 
-<article>
-  
-<h1><a href="/blog/2013/10/06/rvm-update/">RVMでrubyをアップデート</a></h1>
-<time datetime="2013-10-06T13:38:00+09:00" pubdate><span class='month'>Oct</span> <span class='day'>06</span> <span class='year'>2013</span></time>
+<h2 id="toc_127">開発環境</h2>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/rvm/'>RVM</a>, <a class='category' href='/blog/categories/ruby/'>Ruby</a></span>
-</footer>
+<p>CentOS6が乗っているVPSにruby2.1.0+Rails4.0を入れて使ってます。</p>
 
+<h2 id="toc_128">事前準備</h2>
 
-</article>
+<p>画像を扱うため、RMagickをgemでインストールします。
+RMagickはImageMagickをRubyで扱うためのインターフェースなので、ImageMagickが入ってない場合はそれもインストール画筆用です。
+画像管理にはPaperclipを使いました。</p>
 
+<!--more-->
+
+<h1 id="toc_129">動画作成</h1>
+
+<h2 id="toc_130">画像を取り込む</h2>
+
+<p>必要なライブラリを読み込みます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'RMagick'
+</span><span class='line'>include Magick</span></code></pre></td></tr></table></div></figure>
+
+<p>画像から動画への変換はシンプルで、Magick::ImageListというClassで複数枚の画像を扱えるため、まずは器を作ります
+。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>movie = Magick::ImageList.new</span></code></pre></td></tr></table></div></figure>
+
+<p>ドキュメントには、ImageListは配列と同じという記述があるので、配列に動画にしたい画像を追加していきます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>movie.push(Magick::Image.read('path/to/image.jpg').first)</span></code></pre></td></tr></table></div></figure>
+
+<p>追加するイメージもMagick::Image.readで指定します。フレーム指定が出来るメソッドのため結果が配列になる模様。<br>
+そのため、firstでイメージそのものを指定します。<br>
+もっとよいやり方がありそうですが、ひとまずやりたいことが実現できたのでこの方法でよしとしました。</p>
+
+<p>余談ですが、最初は「&lt;&lt;」で追加できると思いましたが、なぜか出来ずpushに。なんとなく配列だったら「&lt;&lt;」を使いたい。</p>
+
+<h2 id="toc_131">画像を動画に変換</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>movie.write('path/to/movie.mp4')</span></code></pre></td></tr></table></div></figure>
+
+<p>これだけでmovieの配列に入っている画像をまとめてmp4にしてくれます。</p>
+
+<p>便利！！！</p>
+
+<p><a href="http://rubydoc.info/gems/rmagick/2.13.1/index">RMagick</a></p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Akiko Saito</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-02-13T15:37:00+09:00" pubdate data-updated="true">Feb 13<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ruby/'>Ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://akiko74.github.com/blog/2014/02/13/rmagick/" data-via="akiko74" data-counturl="http://akiko74.github.com/blog/2014/02/13/rmagick/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/12/22/nokogiri/" title="Previous Post: Nokogiriでノードを指定">&laquo; Nokogiriでノードを指定</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
